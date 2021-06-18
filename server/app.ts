@@ -12,14 +12,14 @@ app.get(
     "/api/test-endpoint"
   ],
   (req, res) => {
-    res.status(200).json({ test: "hello world!" });
+    res.status(200).json({ test: "hello world! Esteban" });
   }
 );
 
 app.get("/api/users/:username", async (req, res) => {
   // your code here!
-    console.log("Hello there")
-    res.status(200).json({ test: "hello there" });
+  console.log("Hello there Esteban")
+  res.status(200).json({ test: "hello there Esteban" });
 });
 
 export default app;

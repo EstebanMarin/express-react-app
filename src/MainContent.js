@@ -42,7 +42,7 @@ export default function MainContent() {
   return (
     <div className="container">
       {users ? (
-        <h1>{`Hello ${JSON.stringify(users)}`}</h1>
+        <h1>{`Hello Esteban${JSON.stringify(users)}`}</h1>
       ) : (
         <h1>Loading... please wait!</h1>
       )}
