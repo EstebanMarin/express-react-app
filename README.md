@@ -9,10 +9,13 @@ Although, the technical challenge is straight forward in what it wants. I want t
 ## Stabilizing the Local environment, focusing on my developer experience and a scalability from the beginning 
 I am as effective as my tools and having a local stable environment to debug is highly productive.
 Therefore, I created this repository, that focused on developer experience, `npm scripts`to help the ramp up, start `Local dev` and also, (hopefully) build containers so serve k8s clusters using `Github` actions.
-## Typescript for backend development, JS in the Front
-I originally intended to have both parts as `typescript` code bases but as the *front-end* code is done with `react-scripts` setting that up was a nightmare. I also tried balacing `tsconfig.json`, `package.json`, `npm scripts` to build whats need it. I ended up doing the following. 
 
-### My crazy run trying to migrate the repo to `typescript`
+## What happend with Typescript?
+
+**TL;DR**: I dropped `typescript` support altoghether => but I have very good reasons why 
+I originally intended to have both parts as `typescript` code bases but as the *front-end* code is done with `react-scripts` setting that up to work just in `JS` and `typescript` backend part, had me figting `commonjs` and `ESM`, and doing a balacing act with my `tsconfig.json`, `package.json`, `npm scripts`. 
+
+### My crazy run trying to upgrade the repo to `typescript` had me:
 - Putting this beauty (🤢) into my `package.json` file:
 ```json
   "scripts": {
@@ -27,9 +30,8 @@ I originally intended to have both parts as `typescript` code bases but as the *
     "test": "jest"
   },
 ```
-- The sweet spot is to install core Types and anything related to typescript as a dev dependency and this, will help us manage bundle sizes, and also ensuring not to ship useless `ts` (`types`) to server nor the client. 
-- We will be using `typescript` just for our `development` environment, with the `sourceMap` flags on to enable debugging, while being mind-full that these files should not be shipped to `production`
-- Running: `mkdir dist && sudo chmod 777 dist` in your (`./`) directory, to allow the scripts to run. Come here if you run with `unauthorized` issues when running `npm scripts`
+- Using `tsc` just for `development` and triggering `nodemon` with a `typescript` compile
+- Running: `mkdir dist && sudo chmod 777 dist` in the (`./`) directory, to allow `node`to run from `npm`, this to solve `unauthorized` issues.
 
 # What are we building? (What)
 
