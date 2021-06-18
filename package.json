@@ -27,9 +27,8 @@
   "scripts": {
     "start": "npm run dev",
     "dev": "concurrently \"npm run server:dev\" \"npm run client:dev\"",
-    "typescript-transpiled-dev": "concurrently \"npm run typescript:server:dev\" \"npm run typescript:client:dev\"",
+    "typescript-transpiled-dev": "concurrently \"npm run typescript:server:dev\" \"npm run client:dev\"",
     "client:dev": "react-scripts start",
-    "typescript:client:dev": "react-scripts start",
     "typescript:server:dev": "nodemon ./dist/server/index.js",
     "server:dev": "nodemon --exec npm run \"server:babel\" server/index.js",
     "server:babel": "babel-node --presets='@babel/preset-env'",
