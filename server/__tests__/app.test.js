@@ -17,9 +17,9 @@ const server = setupServer(
             "maranda_kjos",
             "jacquetta_hoelscher",
             "garth_coto",
-            "leonor_mattis"
+            "leonor_mattis",
           ],
-          uri: `/friend-detail?username=${username}`
+          uri: `/friend-detail?username=${username}`,
         })
       );
     }
@@ -32,9 +32,9 @@ const server = setupServer(
           plays: [
             "E75C38C1-E2BB-BAF6-620B-9255D035B693",
             "E75C38C1-E2BB-BAF6-620B-9255D035B693",
-            "68B4D809-4B4F-F735-EB92-E5B17C99220B"
+            "68B4D809-4B4F-F735-EB92-E5B17C99220B",
           ],
-          uri: `/plays/${username}`
+          uri: `/plays/${username}`,
         })
       );
     }

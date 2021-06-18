@@ -29,6 +29,7 @@
     "client:dev": "react-scripts start",
     "server:dev": "nodemon --exec npm run \"server:babel\" server/index.js",
     "server:babel": "babel-node --presets='@babel/preset-env'",
+    "pretty": "npx prettier --write .",
     "test": "jest"
   },
   "browserslist": [

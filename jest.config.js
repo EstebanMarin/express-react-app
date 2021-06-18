@@ -4,7 +4,7 @@ module.exports = {
       displayName: "backend",
       testEnvironment: "node",
       testMatch: ["<rootDir>/server/**/*.test.js"],
-      setupFilesAfterEnv: ["<rootDir>/testUtils/setupTests.js"]
+      setupFilesAfterEnv: ["<rootDir>/testUtils/setupTests.js"],
     },
     {
       displayName: "frontend",
@@ -13,8 +13,8 @@ module.exports = {
       moduleFileExtensions: ["js", "json"],
       setupFilesAfterEnv: ["<rootDir>/testUtils/setupTests.js"],
       moduleNameMapper: {
-        "\\.(css|less)$": "<rootDir>/testUtils/styleMock.js"
-      }
-    }
-  ]
+        "\\.(css|less)$": "<rootDir>/testUtils/styleMock.js",
+      },
+    },
+  ],
 };

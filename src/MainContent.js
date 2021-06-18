@@ -36,7 +36,7 @@ export default function MainContent() {
   console.log({
     users,
     isLoading,
-    error
+    error,
   });
 
   return (
