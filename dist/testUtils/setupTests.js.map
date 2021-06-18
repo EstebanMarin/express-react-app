@@ -1,1 +1,0 @@
-{"version":3,"file":"setupTests.js","sourceRoot":"","sources":["../../testUtils/setupTests.js"],"names":[],"mappings":";;AAAA,uCAAqC;AACrC,mDAAiD;AACjD,4BAA0B","sourcesContent":["import \"regenerator-runtime/runtime\";\nimport \"@testing-library/jest-dom/extend-expect\";\nimport \"isomorphic-fetch\";\n"]}
