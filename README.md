@@ -54,3 +54,7 @@ As mentioned before this is a two part system.
 ## Backed-end
 
 ## Containers, CI/CD and more
+```
+
+➜  listen-up-full-stack-exercise-javascript git:(take-2) DOCKER_BUILDKIT=1 docker build --target frontend -t twilio:front . 
+```
