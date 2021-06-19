@@ -1,0 +1,19 @@
+version: '2.4'
+
+services:
+    backend:
+        build: 
+            context: .
+            target: backend
+        image: twilio:backend
+        ports: 
+            - '8080:8080'
+    frontend:
+        depends_on: 
+            - backend
+        build:
+            context: .
+            target: frontend
+        image: twilio:frontend
+        ports: 
+            - '3000:3000'
