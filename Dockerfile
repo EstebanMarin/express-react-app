@@ -16,6 +16,7 @@ CMD npm run server:dev
 FROM base as frontend
 ENV NODE_ENV=dev
 EXPOSE 3000
+ENV PORT 3000
 # Volume loading for hot reloading
 COPY /src ./src
 COPY /public ./public
