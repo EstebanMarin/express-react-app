@@ -11,7 +11,9 @@ Although, the technical challenge is straight forward in what it wants. I want t
 I am as effective as my tools and having a local stable environment to debug is highly productive.
 Therefore, I created this repository, that focused on developer experience, `npm scripts`to help the ramp up, start `Local dev` and also, (hopefully) build containers so serve k8s clusters using `Github` actions.
 
-### having prettier, linter and commitlinter
+### having prettier, eslinter and commitlinter
+
+Thinking in the long run, all repos must have at least this to avoid format erros
 
 ## What happend with Typescript?
 
