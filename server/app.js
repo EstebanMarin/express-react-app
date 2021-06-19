@@ -51,6 +51,11 @@ app.get("/api/users/:username", async (req, res, next) => {
   const { data: allUsersPlayInfo } = await axios.get(`${playServices.listAllUsers}`)
   const { data: userNamePlayDetails } = await axios.get(`${playServices.detailUserName}${username}`)
 
+  // business logic
+  const isUserPlay = username => play => play.username === username
+  // https://stackoverflow.com/questions/1960473/get-all-unique-values-in-a-javascript-array-remove-duplicates
+  const onlyUnique = (v, i, s) => s.indexOf(v) === i
+  const URIFactory = s => `/${URI}/${s}`
 
 
   const allUserFriendsPromise = axios.get(`${friendsServices.listAll}`)
@@ -78,11 +83,6 @@ app.get("/api/users/:username", async (req, res, next) => {
   Promise.allSettled(promises).
     then((results) => console.log(results?.value));
 
-  // business logic
-  const isUserPlay = username => play => play.username === username
-  // https://stackoverflow.com/questions/1960473/get-all-unique-values-in-a-javascript-array-remove-duplicates
-  const onlyUnique = (v, i, s) => s.indexOf(v) === i
-  const URIFactory = s => `/${URI}/${s}`
 
   // generate header
   const lazyBody = () => ({
