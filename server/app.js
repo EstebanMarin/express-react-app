@@ -38,6 +38,7 @@ function allPromisesSettled(promises) {
 
 app.get("/api/users/:username", async (req, res) => {
   //constants
+  const URI = `users`
   const twil_io = `https://mauvelous-leopard-5257.twil.io/`
   const friendsServices = {
     "listAll": `${twil_io}friends`,
@@ -59,12 +60,17 @@ app.get("/api/users/:username", async (req, res) => {
   const { data: allUsersPlayInfo } = await axios.get(`${playServices.listAllUsers}`)
   const { data: userNamePlayDetails } = await axios.get(`${playServices.detailUserName}${username}`)
 
-  console.log(userNamePlayDetails)
+  const isUser = username => d => d.username === username
+  // get unique of an array => https://stackoverflow.com/questions/1960473/get-all-unique-values-in-a-javascript-array-remove-duplicates
+  const onlyUnique = (v, i, s) => s.indexOf(v) === i
+  const URIFactory = s => `/${URI}/${s}`
+
   res.status(200).json({
     username: username,
-    // get unique of an array => https://stackoverflow.com/questions/1960473/get-all-unique-values-in-a-javascript-array-remove-duplicates
-    plays: userNamePlayDetails.plays.filter((v, i, s) => s.indexOf(v) === i).length,
-    friends: 
+    friends: userFriendsDetails.friends.length,
+    plays: allUsersPlayInfo.plays.filter(isUser(username)).length,
+    tracks: userNamePlayDetails.plays.filter(onlyUnique),
+    uri: URIFactory(username)
   });
   // const friendsServicePromise =
   //   //cache?
