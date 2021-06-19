@@ -1,5 +1,5 @@
-import React, { useReducer } from "react";
-import "./styles.css";
+import React, { useReducer, useEffect } from "react";
+import { InnerContainer, Input } from "./styles";
 
 function useFetchUsers(username = "ray_benigno") {
   const [users, setUsers] = React.useState();
@@ -31,49 +31,52 @@ function useFetchUsers(username = "ray_benigno") {
   return { users, isLoading, error };
 }
 
-const useFetchUserInfo = user => {
-  return user
-}
-
-//mocked
-
 const mockInput = "ray_benigno"
 
-const initialState = { count: 0 };
+const initialState = {
+  searchTerm: "",
+  userDetail: {}
+};
 
+const actionTypes = {
+  "SEARCH_TERM": "SEARCH_TERM",
+  "GET_SUGGESTIONS": "GET_SUGGESTIONS",
+
+}
 
 const reducer = (state, action) => {
   switch (action.type) {
     // Implementation of Inmutability
-    case 'increment': return Object.assign({}, state, { count: state.count + 1 })
-    case 'decrement': return Object.assign({}, state, { count: state.count - 1 })
+    case actionTypes.SEARCH_TERM: return Object.assign({}, state, { searchTerm: action.payload })
+    case actionTypes.GET_SUGGESTIONS: return Object.assign({}, state, { userDetail: action.payload })
     default:
       return state
   }
 }
 
+const handleChange = dispatch => e => dispatch({ type: actionTypes.SEARCH_TERM, payload: e.target.value })
+
 export default function MainContent() {
-  const { users, isLoading, error } = useFetchUsers(mockInput);
   const [state, dispatch] = useReducer(reducer, initialState)
-  console.log({
-    users,
-    isLoading,
-    error,
-  });
+
+  useEffect(() => {
+    async function getSuggestions() {
+      const response = await fetch(`/api/users/ray_benigno`);
+      dispatch({ type: actionTypes.GET_SUGGESTIONS, payload: response })
+    }
+    getSuggestions()
+  }, [])
 
   return (
     <>
-      Count: {state.count}
-      <button onClick={() => dispatch({ type: 'decrement' })}>-</button>
-      <button onClick={() => dispatch({ type: 'increment' })}>+</button>
-
-      <div className="container">
-        {users ? (
-          <h1>{`Hello ${JSON.stringify(users)}`}</h1>
-        ) : (
-          <h1>Loading... please wait!</h1>
-        )}
-      </div>
+      <InnerContainer>
+        <Input
+          id="input"
+          value={state?.searchTerm}
+          onChange={e => handleChange(dispatch)(e)}
+          type={"text"}
+        />
+      </InnerContainer>
     </>
   );
 }
