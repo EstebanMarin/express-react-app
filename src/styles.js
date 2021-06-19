@@ -10,10 +10,11 @@ export const ValueWrapper = styled.input`
   border: 1px solid #b6c1ce;
   line-height: 32px;
   font-size: xx-large;
+  text-align: center;
 `;
 
 export const InnerContainer = styled.div`
-  height: 100vh;
+  height: 70vh;
   width: 100%;
   display: flex;
   align-items: center;
