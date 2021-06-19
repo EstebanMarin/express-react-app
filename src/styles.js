@@ -21,6 +21,7 @@ export const InnerContainer = styled.div`
   flex-direction: column;
 `;
 
+//adding props here
 export const Input = styled(ValueWrapper)`
 
 `;
