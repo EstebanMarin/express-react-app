@@ -1,7 +1,7 @@
-import React from "react";
+import React, { useReducer } from "react";
 import "./styles.css";
 
-function useFetchUsers(/* username */) {
+function useFetchUsers(username = "ray_benigno") {
   const [users, setUsers] = React.useState();
   const [error, setError] = React.useState();
   const [isLoading, setIsLoading] = React.useState();
@@ -13,7 +13,7 @@ function useFetchUsers(/* username */) {
         setError();
         setIsLoading(true);
 
-        const response = await fetch(`/api/test-endpoint`);
+        const response = await fetch(`/api/users/${username}`);
         const userResponse = await response.json();
 
         setUsers(userResponse);
@@ -31,8 +31,30 @@ function useFetchUsers(/* username */) {
   return { users, isLoading, error };
 }
 
+const useFetchUserInfo = user => {
+  return user
+}
+
+//mocked
+
+const mockInput = "ray_benigno"
+
+const initialState = { count: 0 };
+
+
+const reducer = (state, action) => {
+  switch (action.type) {
+    // Implementation of Inmutability
+    case 'increment': return Object.assign({}, state, { count: state.count + 1 })
+    case 'decrement': return Object.assign({}, state, { count: state.count - 1 })
+    default:
+      return state
+  }
+}
+
 export default function MainContent() {
-  const { users, isLoading, error } = useFetchUsers();
+  const { users, isLoading, error } = useFetchUsers(mockInput);
+  const [state, dispatch] = useReducer(reducer, initialState)
   console.log({
     users,
     isLoading,
@@ -40,12 +62,18 @@ export default function MainContent() {
   });
 
   return (
-    <div className="container">
-      {users ? (
-        <h1>{`Hello ${JSON.stringify(users)}`}</h1>
-      ) : (
-        <h1>Loading... please wait!</h1>
-      )}
-    </div>
+    <>
+      Count: {state.count}
+      <button onClick={() => dispatch({ type: 'decrement' })}>-</button>
+      <button onClick={() => dispatch({ type: 'increment' })}>+</button>
+
+      <div className="container">
+        {users ? (
+          <h1>{`Hello ${JSON.stringify(users)}`}</h1>
+        ) : (
+          <h1>Loading... please wait!</h1>
+        )}
+      </div>
+    </>
   );
 }
