@@ -1,7 +1,7 @@
 {
   "name": "listen-up-full-stack-exercise-javascript",
   "version": "1.0.0",
-  "proxy": "http://localhost:8080",
+  "proxy": "http://localhost:7000",
   "main": "src/index.js",
   "dependencies": {
     "@babel/core": "7.12.13",
