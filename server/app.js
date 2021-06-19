@@ -51,11 +51,7 @@ app.get("/api/users/:username", async (req, res, next) => {
   const { data: allUsersPlayInfo } = await axios.get(`${playServices.listAllUsers}`)
   const { data: userNamePlayDetails } = await axios.get(`${playServices.detailUserName}${username}`)
 
-  const allSettled = promises =>
-    Promise.all(promises.map(promise => promise
-      .then(value => ({ state: 'fulfilled', value }))
-      .catch(reason => ({ state: 'rejected', reason }))
-    ));
+
 
   const allUserFriendsPromise = axios.get(`${friendsServices.listAll}`)
   const userFriendsDetailsPromise = axios.get(`${friendsServices.detailUserName}${username}`)
@@ -69,8 +65,11 @@ app.get("/api/users/:username", async (req, res, next) => {
     userNamePlayDetailsPromise
   ]
 
-  // const isEmptyArray = array => array.length === 0 ? true : false
-  // const managePromiseError = isEmptyArray(results.find(result => result.status === 'rejected')) ? 
+  const allSettled = promises =>
+    Promise.all(promises.map(promise => promise
+      .then(value => ({ state: 'fulfilled', value }))
+      .catch(reason => ({ state: 'rejected', reason }))
+    ));
 
   const variableArray = [
     "allUsers", "userFriendsDetails", "allUsersPlayInfo", "userNamePlayDetails"
