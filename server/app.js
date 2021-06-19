@@ -34,24 +34,37 @@ function allPromisesSettled(promises) {
   return promises.map(isStatus200)
 }
 
-//constants
-const twil_io = `https://mauvelous-leopard-5257.twil.io/`
-const friendsService = {
-  "listAll": `${twil_io}friends`,
-  "detailUserName": `${twil_io}friend-detail?username=`
-}
+
 
 app.get("/api/users/:username", async (req, res) => {
+  //constants
+  const twil_io = `https://mauvelous-leopard-5257.twil.io/`
+  const friendsServices = {
+    "listAll": `${twil_io}friends`,
+    "detailUserName": `${twil_io}friend-detail?username=`
+  }
+  const playServices = {
+    "listAllUsers": `${twil_io}plays`,
+    "detailUserName": `${twil_io}plays-detail?username=`
+  }
   // your code here!
   const { username } = req?.params;
   console.log("Hello there", username);
   //validate type
   //consolidate call
+  //async call
+  // dont make it eager
+  const { data: userFriends } = await axios.get(`${friendsServices.listAll}`)
+  const { data: userFriendsDetails } = await axios.get(`${friendsServices.detailUserName}${username}`)
+  const { data: allUsersPlayInfo } = await axios.get(`${playServices.listAllUsers}`)
+  const { data: userNamePlayDetails } = await axios.get(`${playServices.detailUserName}${username}`)
 
-
+  console.log(userNamePlayDetails)
   res.status(200).json({
     username: username,
-    plays: 178,
+    // get unique of an array => https://stackoverflow.com/questions/1960473/get-all-unique-values-in-a-javascript-array-remove-duplicates
+    plays: userNamePlayDetails.plays.filter((v, i, s) => s.indexOf(v) === i).length,
+    friends: 
   });
   // const friendsServicePromise =
   //   //cache?
