@@ -32,16 +32,7 @@ const isStatus200 = p => Promise.resolve(p)
     val => ({ status: 'fulfilled', value: val }),
     err => ({ status: 'rejected', reason: err }));
 
-const allSettled = promises =>
-  Promise.all(promises.map(promise => promise
-    .then(value => ({ state: 'fulfilled', value }))
-    .catch(reason => ({ state: 'rejected', reason }))
-  ));
 
-
-function allPromisesSettled(promises) {
-  return promises.map(isStatus200)
-}
 
 
 app.get("/api/users/:username", async (req, res, next) => {
@@ -63,12 +54,36 @@ app.get("/api/users/:username", async (req, res, next) => {
   //consolidate call
   //async call
   // dont make it eager
-  const { data: userFriends } = await axios.get(`${friendsServices.listAll}`)
+  const { data: allUsers } = await axios.get(`${friendsServices.listAll}`)
   const { data: userFriendsDetails } = await axios.get(`${friendsServices.detailUserName}${username}`)
   const { data: allUsersPlayInfo } = await axios.get(`${playServices.listAllUsers}`)
   const { data: userNamePlayDetails } = await axios.get(`${playServices.detailUserName}${username}`)
 
+  const allSettled = promises =>
+    Promise.all(promises.map(promise => promise
+      .then(value => ({ state: 'fulfilled', value }))
+      .catch(reason => ({ state: 'rejected', reason }))
+    ));
 
+
+  function allPromisesSettled(promises) {
+    return promises.map(isStatus200)
+  }
+
+  const userFriendsPromise = axios.get(`${friendsServices.listAll}`)
+  const userFriendsDetailsPromise = axios.get(`${friendsServices.detailUserName}${username}`)
+  const allUsersPlayInfoPromise = axios.get(`${playServices.listAllUsers}`)
+  const userNamePlayDetailsPromise = axios.get(`${playServices.detailUserName}${username}`)
+
+  const promises = [
+    userFriendsPromise,
+    userFriendsDetailsPromise,
+    allUsersPlayInfoPromise,
+    userNamePlayDetailsPromise
+  ]
+
+  Promise.allSettled(promises).
+    then((results) => results.forEach((result) => console.log(result.status)));
 
   // business logic
   const isUserPlay = username => play => play.username === username
