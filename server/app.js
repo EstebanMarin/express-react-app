@@ -35,7 +35,6 @@ function allPromisesSettled(promises) {
 }
 
 
-
 app.get("/api/users/:username", async (req, res) => {
   //constants
   const URI = `users`
@@ -60,38 +59,24 @@ app.get("/api/users/:username", async (req, res) => {
   const { data: allUsersPlayInfo } = await axios.get(`${playServices.listAllUsers}`)
   const { data: userNamePlayDetails } = await axios.get(`${playServices.detailUserName}${username}`)
 
-  const isUser = username => d => d.username === username
-  // get unique of an array => https://stackoverflow.com/questions/1960473/get-all-unique-values-in-a-javascript-array-remove-duplicates
+
+
+  // business logic
+  const isUserPlay = username => play => play.username === username
+  // https://stackoverflow.com/questions/1960473/get-all-unique-values-in-a-javascript-array-remove-duplicates
   const onlyUnique = (v, i, s) => s.indexOf(v) === i
   const URIFactory = s => `/${URI}/${s}`
 
-  res.status(200).json({
+  // generate header
+  const lazyBody = () => ({
     username: username,
     friends: userFriendsDetails.friends.length,
-    plays: allUsersPlayInfo.plays.filter(isUser(username)).length,
+    plays: allUsersPlayInfo.plays.filter(isUserPlay(username)).length,
     tracks: userNamePlayDetails.plays.filter(onlyUnique),
     uri: URIFactory(username)
-  });
-  // const friendsServicePromise =
-  //   //cache?
-  //   axios
-  //     .get(
-  //       `${friendsService.username}${username}`
-  //     )
-  //     .then(function (response) {
-  //       // handle success
-  //     })
-  //     .catch(function (error) {
-  //       // delegating error handling to client, making server more resilient, when error fetching. Agnostic to the response
-  //       res.status(500).json({ error: "client to handle error" });
-  //     })
-  //     .then(function () {
-  //       // logging for all purposes
-  //       // logging process.env.INFO
-  //       console.info(
-  //         `RAN process on: ${username} from: ${req?.headers.host} in ${process.env.NODE_ENV}`
-  //       );
-  //     });
+  })
+
+  res.status(200).json(lazyBody());
 });
 
 export default app;
