@@ -11,10 +11,12 @@ Although, the technical challenge is straight forward in what it wants. I want t
 I am as effective as my tools and having a local stable environment to debug is highly productive.
 Therefore, I created this repository, that focused on developer experience, `npm scripts`to help the ramp up, start `Local dev` and also, (hopefully) build containers so serve k8s clusters using `Github` actions.
 
+### having prettier, linter and commitlinter
+
 ## What happend with Typescript?
 
 **TL;DR**: I dropped `typescript` support altoghether => but I have very good reasons why
-I originally intended to have both parts as `typescript` code bases but as the _front-end_ code is done with `react-scripts` setting that up to work just in `JS` and `typescript` backend part, had me figting `commonjs` and `ESM`, and doing a balacing act with my `tsconfig.json`, `package.json`, `npm scripts`.
+I originally intended to have both parts as `typescript` code bases but as the _front-end_ code is done with `react-scripts` setting that up to work just in `JS` and `typescript` backend part, had me figting `commonjs` and `ESM`, and doing a balacing act with my `tsconfig.json`, `package.json`, `npm scripts`. More down below or check `master` branch commit `DEAD-END`
 
 ### My crazy run trying to upgrade the repo to `typescript` had me:
 
