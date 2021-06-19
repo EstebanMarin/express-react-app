@@ -18,42 +18,61 @@ app.get(
   }
 );
 
-// async function agregateData() {
-//   try {
-//     //fetch from all end points
-//     const friends =
-//   }
-// }
+const isStatus200 = p => Promise.resolve(p)
+  .then(
+    val => ({ status: 'fulfilled', value: val }),
+    err => ({ status: 'rejected', reason: err }));
+
+const allSettled = promises =>
+  Promise.all(promises.map(promise => promise
+    .then(value => ({ state: 'fulfilled', value }))
+    .catch(reason => ({ state: 'rejected', reason }))
+  ));
+
+
+function allPromisesSettled(promises) {
+  return promises.map(isStatus200)
+}
+
+//constants
+const twil_io = `https://mauvelous-leopard-5257.twil.io/`
+const friendsService = {
+  "listAll": `${twil_io}friends`,
+  "detailUserName": `${twil_io}friend-detail?username=`
+}
 
 app.get("/api/users/:username", async (req, res) => {
   // your code here!
-  const username = req?.params?.username;
+  const { username } = req?.params;
   console.log("Hello there", username);
   //validate type
-  axios
-    .get(
-      `https://mauvelous-leopard-5257.twil.io/friend-detail?username=${username}`
-    )
-    .then(function (response) {
-      // handle success
-      console.log(response);
-      res.status(200).json({
-        username: req?.params?.username,
-        plays: 178,
-      });
-    })
-    .catch(function (error) {
-      // delegating error handling to client, making server more resilient, when error fetching. Agnostic to the response
-      console.log(error);
-      res.status(500).json({ error: "client to handle error" });
-    })
-    .then(function () {
-      // logging for all purposes
-      // logging process.env.INFO
-      console.info(
-        `RAN process on: ${username} from: ${req?.headers.host} in ${process.env.NODE_ENV}`
-      );
-    });
+  //consolidate call
+
+
+  res.status(200).json({
+    username: username,
+    plays: 178,
+  });
+  // const friendsServicePromise =
+  //   //cache?
+  //   axios
+  //     .get(
+  //       `${friendsService.username}${username}`
+  //     )
+  //     .then(function (response) {
+  //       // handle success
+  //     })
+  //     .catch(function (error) {
+  //       // delegating error handling to client, making server more resilient, when error fetching. Agnostic to the response
+  //       res.status(500).json({ error: "client to handle error" });
+  //     })
+  //     .then(function () {
+  //       // logging for all purposes
+  //       // logging process.env.INFO
+  //       console.info(
+  //         `RAN process on: ${username} from: ${req?.headers.host} in ${process.env.NODE_ENV}`
+  //       );
+  //     });
 });
 
 export default app;

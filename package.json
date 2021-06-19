@@ -27,7 +27,7 @@
     "start": "npm run dev",
     "dev": "concurrently \"npm run server:dev\" \"npm run client:dev\"",
     "client:dev": "react-scripts start",
-    "server:dev": "nodemon --exec npm run \"server:babel\" server/index.js",
+    "server:dev": "NODE_ENV=DEVELOP nodemon --exec npm run \"server:babel\" server/index.js",
     "server:babel": "babel-node --presets='@babel/preset-env'",
     "pretty": "npx prettier --write .",
     "eslint": "npx eslint --init",
