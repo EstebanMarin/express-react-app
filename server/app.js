@@ -70,19 +70,9 @@ app.get("/api/users/:username", async (req, res, next) => {
     userNamePlayDetailsPromise
   ]
 
-  const allSettled = promises =>
-    Promise.all(promises.map(promise => promise
-      .then(value => ({ state: 'fulfilled', value }))
-      .catch(reason => ({ state: 'rejected', reason }))
-    ));
-
   const variableArray = [
     "allUsers", "userFriendsDetails", "allUsersPlayInfo", "userNamePlayDetails"
   ]
-
-  Promise.allSettled(promises).
-    then((results) => console.log(results?.value));
-
 
   // generate header
   const lazyBody = () => ({
@@ -92,6 +82,11 @@ app.get("/api/users/:username", async (req, res, next) => {
     tracks: userNamePlayDetails.plays.filter(onlyUnique),
     uri: URIFactory(username)
   })
+
+
+  Promise.allSettled(promises).
+    then((results) => console.log(results?.value));
+
 
   res.status(200).json(lazyBody());
 });
