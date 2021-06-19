@@ -1,9 +1,16 @@
 import express from "express";
 const axios = require("axios").default;
-
 // axios.<method> will now provide autocomplete and parameter typings
 
-const app = express();
+// add middleware to cache
+
+const app = express().use(express.bodyParser());
+
+app.all('/', function (req, res, next) {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Headers", "X-Requested-With");
+  next();
+});
 
 app.get(
   [
@@ -35,7 +42,7 @@ function allPromisesSettled(promises) {
 }
 
 
-app.get("/api/users/:username", async (req, res) => {
+app.get("/api/users/:username", async (req, res, next) => {
   //constants
   const URI = `users`
   const twil_io = `https://mauvelous-leopard-5257.twil.io/`
