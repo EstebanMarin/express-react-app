@@ -1,0 +1,168 @@
+{
+	"info": {
+		"_postman_id": "ce53bce5-55ef-411b-8717-0734f17dac2b",
+		"name": "Twilio",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "/api/test-endpoint",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:7000",
+					"host": [
+						"localhost"
+					],
+					"port": "7000"
+				}
+			},
+			"response": []
+		},
+		{
+			"name": ":username",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:7000/api/users/:username",
+					"host": [
+						"localhost"
+					],
+					"port": "7000",
+					"path": [
+						"api",
+						"users",
+						":username"
+					],
+					"variable": [
+						{
+							"key": "username",
+							"value": "ray_benigno"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "error in :username",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:7000/api/users/:username",
+					"host": [
+						"localhost"
+					],
+					"port": "7000",
+					"path": [
+						"api",
+						"users",
+						":username"
+					],
+					"variable": [
+						{
+							"key": "username",
+							"value": "error-name"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Friends Service",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://mauvelous-leopard-5257.twil.io/friends",
+					"protocol": "https",
+					"host": [
+						"mauvelous-leopard-5257",
+						"twil",
+						"io"
+					],
+					"path": [
+						"friends"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Friends Service ? username",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://mauvelous-leopard-5257.twil.io/friend-detail?username=ray_benigno",
+					"protocol": "https",
+					"host": [
+						"mauvelous-leopard-5257",
+						"twil",
+						"io"
+					],
+					"path": [
+						"friend-detail"
+					],
+					"query": [
+						{
+							"key": "username",
+							"value": "ray_benigno"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Play Service",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://mauvelous-leopard-5257.twil.io/plays",
+					"protocol": "https",
+					"host": [
+						"mauvelous-leopard-5257",
+						"twil",
+						"io"
+					],
+					"path": [
+						"plays"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Play Service ? username",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://mauvelous-leopard-5257.twil.io/plays-detail?username=ray_benigno",
+					"protocol": "https",
+					"host": [
+						"mauvelous-leopard-5257",
+						"twil",
+						"io"
+					],
+					"path": [
+						"plays-detail"
+					],
+					"query": [
+						{
+							"key": "username",
+							"value": "ray_benigno"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

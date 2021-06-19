@@ -10,7 +10,7 @@ ENV NODE_ENV=dev
 EXPOSE 8080
 ENV PORT 8080
 # Volume loading for hot reloading
-COPY /server ./server
+# COPY /server ./server
 CMD npm run server:dev
 
 FROM base as frontend

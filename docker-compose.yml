@@ -8,6 +8,8 @@ services:
         image: twilio:backend
         ports: 
             - '8080:8080'
+        volumes: 
+            - ./server:/app/sever
     frontend:
         depends_on: 
             - backend
@@ -19,6 +21,9 @@ services:
             - backend
         ports: 
             - '3000:3000'
+        volumes: 
+            - ./src:/app/src
+            - ./public:/app/public
     nginx: 
         depends_on: 
             - frontend

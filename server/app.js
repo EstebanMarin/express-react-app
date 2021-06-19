@@ -25,8 +25,6 @@ const isStatus200 = p => Promise.resolve(p)
     err => ({ status: 'rejected', reason: err }));
 
 
-
-
 app.get("/api/users/:username", async (req, res, next) => {
   //constants
   const URI = `users`
@@ -84,8 +82,8 @@ app.get("/api/users/:username", async (req, res, next) => {
   })
 
 
-  Promise.allSettled(promises).
-    then((results) => console.log(results?.value));
+  // Promise.allSettled(promises).
+  //   then((results) => console.log(results?.value));
 
 
   res.status(200).json(lazyBody());
