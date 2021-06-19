@@ -4,15 +4,7 @@ const axios = require("axios").default;
 
 // add middleware to cache
 
-const app = express().use(express.bodyParser());
-
-app.all('/', function (req, res, next) {
-  res.header("Access-Control-Allow-Origin", "*");
-  res.header("Access-Control-Allow-Headers", "X-Requested-With");
-  // Using browser cache https://developer.mozilla.org/en-US/docs/Web/HTTP/Caching
-  res.set("Cache-control", "public, max-age=300")
-  next();
-});
+const app = express();
 
 app.get(
   [
@@ -65,25 +57,27 @@ app.get("/api/users/:username", async (req, res, next) => {
       .catch(reason => ({ state: 'rejected', reason }))
     ));
 
-
-  function allPromisesSettled(promises) {
-    return promises.map(isStatus200)
-  }
-
-  const userFriendsPromise = axios.get(`${friendsServices.listAll}`)
+  const allUserFriendsPromise = axios.get(`${friendsServices.listAll}`)
   const userFriendsDetailsPromise = axios.get(`${friendsServices.detailUserName}${username}`)
   const allUsersPlayInfoPromise = axios.get(`${playServices.listAllUsers}`)
   const userNamePlayDetailsPromise = axios.get(`${playServices.detailUserName}${username}`)
 
   const promises = [
-    userFriendsPromise,
+    allUserFriendsPromise,
     userFriendsDetailsPromise,
     allUsersPlayInfoPromise,
     userNamePlayDetailsPromise
   ]
 
+  // const isEmptyArray = array => array.length === 0 ? true : false
+  // const managePromiseError = isEmptyArray(results.find(result => result.status === 'rejected')) ? 
+
+  const variableArray = [
+    "allUsers", "userFriendsDetails", "allUsersPlayInfo", "userNamePlayDetails"
+  ]
+
   Promise.allSettled(promises).
-    then((results) => results.forEach((result) => console.log(result.status)));
+    then((results) => console.log(results?.value));
 
   // business logic
   const isUserPlay = username => play => play.username === username
