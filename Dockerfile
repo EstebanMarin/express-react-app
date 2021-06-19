@@ -21,3 +21,6 @@ ENV PORT 3000
 COPY /src ./src
 COPY /public ./public
 CMD npm run client:dev
+
+FROM nginx as reverseproxy
+COPY /nginx/default.conf /etc/nginx/conf.d/default.conf

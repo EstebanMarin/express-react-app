@@ -15,5 +15,20 @@ services:
             context: .
             target: frontend
         image: twilio:frontend
+        links: 
+            - backend
         ports: 
             - '3000:3000'
+    nginx: 
+        depends_on: 
+            - frontend
+            - backend
+        build:
+            context: .
+            target: reverseproxy
+        image: twilio:reverseproxy
+        links:
+            - backend
+            - frontend
+        ports:
+            - '7000:7000'
