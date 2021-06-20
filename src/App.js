@@ -2,7 +2,7 @@ import React from "react";
 import { Input } from "./components/InputComponent";
 import { GlobalStyle, InnerContainer } from "./components/GlobalStyle"
 import ShowDetails from "./components/DetailsComponent"
-import { useTwilioHook } from "./hooks"
+import { useTwilioHook, actionTypes } from "./hooks"
 
 
 const handleChange = dispatch => e => dispatch({ type: actionTypes.SEARCH_TERM, payload: e.target.value })
