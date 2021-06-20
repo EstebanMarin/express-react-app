@@ -2,6 +2,10 @@
 
 thanks for checking out this repository. I intend to make it easy for you to explore it and also see the though process. While also get you excited in the right parts, and well, forwarding my hiring process.
 
+# We are now BETA 😅
+
+![Working Prototype](https://github.com/EstebanMarin/express-react-app/blob/mvp-alfa/EMM_app_GIF.gif)
+
 # Thought process (why?)
 
 Although, the technical challenge is straight forward in what it wants. I want to play the role to which I am applying and assuming this as a **OPEN PROJECT REVIEW** as it is called in _twilio_ and deliver an "actual" **product**, this will make me assume **stuff**, but I hepe these assumtions will trigger the conversation.
