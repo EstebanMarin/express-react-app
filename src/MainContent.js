@@ -1,5 +1,6 @@
 import React, { useReducer, useEffect } from "react";
 import { InnerContainer, Input } from "./styles";
+import axios from "axios"
 
 function useFetchUsers(username = "ray_benigno") {
   const [users, setUsers] = React.useState();
@@ -13,7 +14,7 @@ function useFetchUsers(username = "ray_benigno") {
         setError();
         setIsLoading(true);
 
-        const response = await fetch(`/api/users/${username}`);
+        const response = await axios.get(`/api/users/${username}`);
         const userResponse = await response.json();
 
         setUsers(userResponse);
@@ -61,8 +62,8 @@ export default function MainContent() {
 
   useEffect(() => {
     async function getSuggestions() {
-      const response = await fetch(`/api/users/ray_benigno`);
-      dispatch({ type: actionTypes.GET_SUGGESTIONS, payload: response })
+      const { data: userDetails } = await axios.get(`/api/users/ray_benigno`);
+      dispatch({ type: actionTypes.GET_SUGGESTIONS, payload: userDetails })
     }
     getSuggestions()
   }, [])
