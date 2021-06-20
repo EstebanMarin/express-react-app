@@ -56,6 +56,7 @@ const reducer = (state, action) => {
       // chech for user before calling api
       console.log(`serch-term: ${state.searchTerm}`)
       axios.get(`/api/users/${state.searchTerm}`)
+        // dispatch update 
         .then(result => console.log("fetching", result.data))
       return Object.assign({}, state, { searchTerm: "" })
     }
