@@ -2,8 +2,6 @@ import express from "express";
 const axios = require("axios").default;
 // axios.<method> will now provide autocomplete and parameter typings
 
-// add middleware to cache
-
 const app = express();
 
 app.get(
@@ -19,10 +17,7 @@ app.get(
   }
 );
 
-const isStatus200 = p => Promise.resolve(p)
-  .then(
-    val => ({ status: 'fulfilled', value: val }),
-    err => ({ status: 'rejected', reason: err }));
+
 
 
 app.get("/api/users/:username", async (req, res, next) => {
@@ -39,21 +34,14 @@ app.get("/api/users/:username", async (req, res, next) => {
   }
   // your code here!
   const { username } = req?.params;
-  console.log("Hello there", username);
-  //validate type
-  //consolidate call
-  //async call
-  // dont make it eager
-  const { data: allUsers } = await axios.get(`${friendsServices.listAll}`)
-  const { data: userFriendsDetails } = await axios.get(`${friendsServices.detailUserName}${username}`)
-  const { data: allUsersPlayInfo } = await axios.get(`${playServices.listAllUsers}`)
-  const { data: userNamePlayDetails } = await axios.get(`${playServices.detailUserName}${username}`)
 
-  // business logic
+  // predicates
   const isUserPlay = username => play => play.username === username
   // https://stackoverflow.com/questions/1960473/get-all-unique-values-in-a-javascript-array-remove-duplicates
   const onlyUnique = (v, i, s) => s.indexOf(v) === i
   const URIFactory = s => `/${URI}/${s}`
+  const isRejectedPromise = promise => promise.status === 'rejected'
+  const anyRejectionAnswer400 = results => results.filter(isRejectedPromise).length > 0
 
 
   const allUserFriendsPromise = axios.get(`${friendsServices.listAll}`)
@@ -68,25 +56,35 @@ app.get("/api/users/:username", async (req, res, next) => {
     userNamePlayDetailsPromise
   ]
 
-  const variableArray = [
-    "allUsers", "userFriendsDetails", "allUsersPlayInfo", "userNamePlayDetails"
-  ]
-
-  // generate header
-  const lazyBody = () => ({
-    username: username,
-    friends: userFriendsDetails.friends.length,
-    plays: allUsersPlayInfo.plays.filter(isUserPlay(username)).length,
-    tracks: userNamePlayDetails.plays.filter(onlyUnique),
-    uri: URIFactory(username)
-  })
+  const generateBody = result => {
+    const dataCleanup = answer => answer?.value?.data
+    const [
+      allUserFriends,
+      userFriendsDetails,
+      allUsersPlayInfo,
+      userNamePlayDetails
+    ] = result.map(dataCleanup)
 
 
-  // Promise.allSettled(promises).
-  //   then((results) => console.log(results?.value));
+    return {
+      username: username,
+      friends: userFriendsDetails.friends.length,
+      plays: allUsersPlayInfo.plays.filter(isUserPlay(username)).length,
+      tracks: userNamePlayDetails.plays.filter(onlyUnique),
+      uri: URIFactory(username)
+    }
+  }
+
+  Promise.allSettled(promises)
+    .then((results) => {
+      console.log(`Hello ${username}`)
+      anyRejectionAnswer400(results) ?
+        res.status(400).json({ error: "no username" }) :
+        res.status(200).json(generateBody(results))
+    }).
+    catch(error => res.status(500).json({ error: "no username" }))
 
 
-  res.status(200).json(lazyBody());
 });
 
 export default app;

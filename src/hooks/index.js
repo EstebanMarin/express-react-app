@@ -35,13 +35,13 @@ export const useTwilioHook = () => {
     const [state, dispatch] = useReducer(reducer, initialState)
     //MVP alpha use useEffect to handle when enter, change in the state
 
-    useEffect(() => {
-        async function getSuggestions() {
-            console.log("hey there you  pressed enter")
-            dispatch({ type: actionTypes.GET_SUGGESTIONS, payload: usersSuggestions })
-        }
-        getSuggestions()
-    }, [])
+    // useEffect(() => {
+    //     async function getSuggestions() {
+    //         console.log("hey there you  pressed enter")
+    //         dispatch({ type: actionTypes.GET_SUGGESTIONS, payload: usersSuggestions })
+    //     }
+    //     getSuggestions()
+    // }, [])
 
 
     return [state, dispatch]
