@@ -3,6 +3,17 @@ import styled from "styled-components";
 import { Input } from "./InputComponent";
 import ShowDetails from "./DetailsComponent"
 import axios from "axios"
+import { createGlobalStyle } from 'styled-components'
+
+
+const GlobalStyle = createGlobalStyle`
+  body {
+    font-size: 16;
+  }
+  * {
+    font-family: Helvetica;
+  }
+`
 
 const initialState = {
   searchTerm: "",
@@ -64,6 +75,7 @@ export default function MainContent() {
 
   return (
     <>
+      <GlobalStyle />
       <InnerContainer>
         <Input
           id="input"
