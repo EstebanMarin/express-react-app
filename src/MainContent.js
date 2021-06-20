@@ -42,6 +42,7 @@ const initialState = {
 const actionTypes = {
   "SEARCH_TERM": "SEARCH_TERM",
   "GET_SUGGESTIONS": "GET_SUGGESTIONS",
+  "ENTER_KEY_PRESSED": "ENTER_KEY_PRESSED"
 
 }
 
@@ -50,23 +51,34 @@ const reducer = (state, action) => {
     // Implementation of Inmutability
     case actionTypes.SEARCH_TERM: return Object.assign({}, state, { searchTerm: action.payload })
     case actionTypes.GET_SUGGESTIONS: return Object.assign({}, state, { userDetail: action.payload })
+    case actionTypes.ENTER_KEY_PRESSED: {
+      // dispacher available through action.dispatch
+      // chech for user before calling api
+      console.log(`serch-term: ${state.searchTerm}`)
+      axios.get(`/api/users/${state.searchTerm}`)
+        .then(result => console.log("fetching", result.data))
+      return Object.assign({}, state, { searchTerm: "" })
+    }
     default:
       return state
   }
 }
 
 const handleChange = dispatch => e => dispatch({ type: actionTypes.SEARCH_TERM, payload: e.target.value })
+const handleEnter = dispatch => ({ keyCode, which }) => (keyCode === 13 || which === 13) && dispatch({ type: actionTypes.ENTER_KEY_PRESSED, dispatch })
 
 export default function MainContent() {
   const [state, dispatch] = useReducer(reducer, initialState)
+  // action factory that attaches the dispacher
+  const thunk = username => dispatch => { }
 
-  useEffect(() => {
-    async function getSuggestions() {
-      const { data: userDetails } = await axios.get(`/api/users/ray_benigno`);
-      dispatch({ type: actionTypes.GET_SUGGESTIONS, payload: userDetails })
-    }
-    getSuggestions()
-  }, [])
+  // useEffect(() => {
+  //   async function getSuggestions() {
+  //     const { data: userDetails } = await axios.get(`/api/users/ray_benigno`);
+  //     dispatch({ type: actionTypes.GET_SUGGESTIONS, payload: userDetails })
+  //   }
+  //   getSuggestions()
+  // }, [])
 
   return (
     <>
@@ -74,8 +86,9 @@ export default function MainContent() {
         <Input
           id="input"
           value={state?.searchTerm}
-          onChange={e => handleChange(dispatch)(e)}
+          onChange={handleChange(dispatch)}
           type={"text"}
+          onKeyPress={handleEnter(dispatch)}
         />
       </InnerContainer>
     </>
