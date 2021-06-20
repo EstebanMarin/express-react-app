@@ -13,14 +13,6 @@ export const ValueWrapper = styled.input`
   text-align: center;
 `;
 
-export const InnerContainer = styled.div`
-  height: 70vh;
-  width: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-`;
 
 //adding props here
 export const Input = styled(ValueWrapper)`

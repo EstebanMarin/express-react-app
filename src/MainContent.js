@@ -1,5 +1,7 @@
 import React, { useReducer, useEffect } from "react";
-import { InnerContainer, Input } from "./InputComponent";
+import styled from "styled-components";
+import { Input } from "./InputComponent";
+import ShowDetails from "./DetailsComponent"
 import axios from "axios"
 
 const initialState = {
@@ -21,13 +23,9 @@ const reducer = (state, action) => {
     // Implementation of Inmutability
     case actionTypes.SEARCH_TERM: return Object.assign({}, state, { searchTerm: action.payload })
     case actionTypes.GET_SUGGESTIONS: return Object.assign({}, state, { getSuggetions: action.payload })
-    case actionTypes.UPDATE_USER_DETAILS: return Object.assign({}, state, { userDetail: action.payload })
+    case actionTypes.UPDATE_USER_DETAILS: return Object.assign({}, state, { userDetail: action.payload, searchTerm: "" })
     case actionTypes.ENTER_KEY_PRESSED: {
-      // dispacher available through action.dispatch
-      // chech for user before calling api
-      console.log(`serch-term: ${state.searchTerm}`)
       axios.get(`/api/users/${state.searchTerm}`)
-        // dispatch update 
         .then(result => action.dispatch({ type: actionTypes.UPDATE_USER_DETAILS, payload: result.data }))
     }
     default:
@@ -39,12 +37,14 @@ const handleChange = dispatch => e => dispatch({ type: actionTypes.SEARCH_TERM, 
 const handleEnter = dispatch => ({ keyCode, which }) => (keyCode === 13 || which === 13) && dispatch({ type: actionTypes.ENTER_KEY_PRESSED, dispatch })
 const isEmpty = obj => Object.keys(obj).length === 0
 
-const showDetails = props => {
-  const { username, plays, friends, tracks, uri } = props
-  return <div>
-    `${username, plays, friends, uri, tracks}`
-  </div >
-}
+export const InnerContainer = styled.div`
+  height: 70vh;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+`;
 
 export default function MainContent() {
   const [{ searchTerm, userDetail, getSuggetions }, dispatch] = useReducer(reducer, initialState)
@@ -70,9 +70,7 @@ export default function MainContent() {
           onKeyPress={handleEnter(dispatch)}
         />
         <p>ray_benigno</p>
-        {isEmpty(userDetail) ? console.log("nothing") :
-          showDetails(userDetail)
-        }
+        {isEmpty(userDetail) ? console.log("nothing") : ShowDetails(userDetail)}
       </InnerContainer>
     </>
   );
