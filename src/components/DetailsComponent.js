@@ -10,11 +10,11 @@ const ShowDetails = props => {
     const { username, plays, friends, tracks, uri } = props
     return (
         <InnerContainer>
-            <h2>Username {username}</h2>
-            <p>Plays: {plays}</p>
-            <p>Friends: {friends}</p>
-            <p>uri: {uri}</p>
-            <p>tracks: {tracks.length}</p>
+            <h2>Username: {username}</h2>
+            <p><strong>Plays: </strong>{plays}</p>
+            <p><strong>Friends: </strong>{friends}</p>
+            <p><strong>uri: </strong>{uri}</p>
+            <p><strong>tracks: </strong>{tracks.length}</p>
         </InnerContainer>
     )
 }
