@@ -4,6 +4,8 @@ thanks for checking out this repository. I intend to make it easy for you to exp
 
 # We are now BETA 😅
 
+There are still many things to improve, checkout [Projects](https://github.com/EstebanMarin/express-react-app/projects), or [OPEN_ISSUES](https://github.com/EstebanMarin/express-react-app/issues), to get a full picture of the project
+
 ![Working Prototype](https://github.com/EstebanMarin/express-react-app/blob/mvp-alfa/EMM_app_GIF.gif)
 
 # Thought process (why?)
