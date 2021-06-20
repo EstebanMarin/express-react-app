@@ -15,16 +15,6 @@ export const actionTypes = {
 
 }
 
-//MVP alpha use useEffect to handle when enter, change in the state
-
-// useEffect(() => {
-//   async function getSuggestions() {
-//     const { data: userDetails } = await axios.get(`/api/users/suggestions`);
-//     dispatch({ type: actionTypes.GET_SUGGESTIONS, payload: usersSuggestions })
-//   }
-//   getSuggestions()
-// }, [])
-
 export const reducer = (state, action) => {
     switch (action.type) {
         // Implementation of Inmutability
@@ -39,4 +29,20 @@ export const reducer = (state, action) => {
         default:
             return state
     }
+}
+
+export const useTwilioHook = () => {
+    const [state, dispatch] = useReducer(reducer, initialState)
+    //MVP alpha use useEffect to handle when enter, change in the state
+
+    // useEffect(() => {
+    //   async function getSuggestions() {
+    //     const { data: userDetails } = await axios.get(`/api/users/suggestions`);
+    //     dispatch({ type: actionTypes.GET_SUGGESTIONS, payload: usersSuggestions })
+    //   }
+    //   getSuggestions()
+    // }, [])
+
+
+    return [state, dispatch]
 }

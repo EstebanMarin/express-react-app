@@ -1,4 +1,3 @@
-import react from "react"
 import styled, { css } from "styled-components";
 
 const InnerContainer = styled.div`
