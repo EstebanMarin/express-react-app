@@ -1,4 +1,5 @@
-
+import { useReducer, useEffect } from "react";
+import axios from "axios"
 
 export const initialState = {
     searchTerm: "",
@@ -13,6 +14,16 @@ export const actionTypes = {
     "UPDATE_USER_DETAILS": "UPDATE_USER_DETAILS"
 
 }
+
+//MVP alpha use useEffect to handle when enter, change in the state
+
+// useEffect(() => {
+//   async function getSuggestions() {
+//     const { data: userDetails } = await axios.get(`/api/users/suggestions`);
+//     dispatch({ type: actionTypes.GET_SUGGESTIONS, payload: usersSuggestions })
+//   }
+//   getSuggestions()
+// }, [])
 
 export const reducer = (state, action) => {
     switch (action.type) {

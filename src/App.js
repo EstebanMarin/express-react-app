@@ -1,10 +1,9 @@
 import React, { useReducer, useEffect } from "react";
 import styled from "styled-components";
-import { Input } from "./InputComponent";
-import ShowDetails from "./DetailsComponent"
-import axios from "axios"
+import { Input } from "./components/InputComponent";
+import ShowDetails from "./components/DetailsComponent"
 import { createGlobalStyle } from 'styled-components'
-import { reducer, initialState, actionTypes } from "./reducer"
+import { reducer, initialState, actionTypes } from "./hooks"
 
 
 const GlobalStyle = createGlobalStyle`
@@ -34,15 +33,6 @@ export const InnerContainer = styled.div`
 export default function MainContent() {
   const [{ searchTerm, userDetail, getSuggetions }, dispatch] = useReducer(reducer, initialState)
 
-  //MVP alpha use useEffect to handle when enter, change in the state
-
-  // useEffect(() => {
-  //   async function getSuggestions() {
-  //     const { data: userDetails } = await axios.get(`/api/users/suggestions`);
-  //     dispatch({ type: actionTypes.GET_SUGGESTIONS, payload: usersSuggestions })
-  //   }
-  //   getSuggestions()
-  // }, [])
 
   return (
     <>

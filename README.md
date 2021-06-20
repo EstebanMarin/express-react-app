@@ -9,7 +9,7 @@ thanks for checking out this repository. I intend to make it easy for you to exp
 
 You are as fast as your local development environment: That has a `multi-stage, multi-build` `Dockerfile`, and a `docker-compose up` that uses `Nginx`as a reverse proxy to avoid any `CORS` issues, as well as avoid rebuilding images with each code change (using `volume mount`) whist still have **HOT-RELOADING** for both *front* and *back*  🤯🤯🤯🤯🤯.
 
-Don't like `docker`? no worries, we have `.nvmrc` so you can do local development as well ..... but who does not like `docker`?
+Don't like `docker`? no worries, we have `.nvmrc` so you can do local development as well .....
 
 ## We are now BETA 😅
 
