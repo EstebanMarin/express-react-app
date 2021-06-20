@@ -4,6 +4,7 @@ import { Input } from "./InputComponent";
 import ShowDetails from "./DetailsComponent"
 import axios from "axios"
 import { createGlobalStyle } from 'styled-components'
+import { reducer, initialState, actionTypes } from "./reducer"
 
 
 const GlobalStyle = createGlobalStyle`
@@ -14,36 +15,6 @@ const GlobalStyle = createGlobalStyle`
     font-family: Helvetica;
   }
 `
-
-const initialState = {
-  searchTerm: "",
-  userDetail: {},
-  getSuggetions: []
-};
-
-const actionTypes = {
-  "SEARCH_TERM": "SEARCH_TERM",
-  "GET_SUGGESTIONS": "GET_SUGGESTIONS",
-  "ENTER_KEY_PRESSED": "ENTER_KEY_PRESSED",
-  "UPDATE_USER_DETAILS": "UPDATE_USER_DETAILS"
-
-}
-
-const reducer = (state, action) => {
-  switch (action.type) {
-    // Implementation of Inmutability
-    case actionTypes.SEARCH_TERM: return Object.assign({}, state, { searchTerm: action.payload })
-    case actionTypes.GET_SUGGESTIONS: return Object.assign({}, state, { getSuggetions: action.payload })
-    case actionTypes.UPDATE_USER_DETAILS: return Object.assign({}, state, { userDetail: action.payload, searchTerm: "" })
-    // escape hatch for async data fetching
-    case actionTypes.ENTER_KEY_PRESSED: {
-      axios.get(`/api/users/${state.searchTerm}`)
-        .then(result => action.dispatch({ type: actionTypes.UPDATE_USER_DETAILS, payload: result.data }))
-    }
-    default:
-      return state
-  }
-}
 
 const handleChange = dispatch => e => dispatch({ type: actionTypes.SEARCH_TERM, payload: e.target.value })
 const handleEnter = dispatch => ({ keyCode, which }) => (keyCode === 13 || which === 13) && dispatch({ type: actionTypes.ENTER_KEY_PRESSED, dispatch })
