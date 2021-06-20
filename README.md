@@ -2,16 +2,16 @@
 
 thanks for checking out this repository. I intend to make it easy for you to explore it and also see the though process. While also get you excited in the right parts, and well, forwarding my hiring process.
 
-# Focusing in productivity 🐳 
+## Focusing in productivity in a dockerized environment 🐳 
 
 > What a pleasure! you just run `docker-compose up` and you can code away!
 > - The only developer that has used this repo
 
-You are as fast as your local env, and with a `multi-stage, multi-build` `Dockerfile`, and a `docker-compose up` that uses `Nginx`as a reverse proxy to avoid any `CORS` issues, as well as avoid rebuilding images with each code change (`volume mount`) whist still have **HOT-RELOADING** for both *front* and *back*  🤯🤯🤯🤯🤯.
+You are as fast as your local development environment: That has a `multi-stage, multi-build` `Dockerfile`, and a `docker-compose up` that uses `Nginx`as a reverse proxy to avoid any `CORS` issues, as well as avoid rebuilding images with each code change (using `volume mount`) whist still have **HOT-RELOADING** for both *front* and *back*  🤯🤯🤯🤯🤯.
 
-Don't like `docker`? no worries, we have `.nvmrc` so you can do local development as well.
+Don't like `docker`? no worries, we have `.nvmrc` so you can do local development as well ..... but who does not like `docker`?
 
-# We are now BETA 😅
+## We are now BETA 😅
 
 There are still many things to improve, checkout [Projects](https://github.com/EstebanMarin/express-react-app/projects), or [OPEN_ISSUES](https://github.com/EstebanMarin/express-react-app/issues), to get a full picture of the project
 
