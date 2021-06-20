@@ -2,6 +2,21 @@
 
 thanks for checking out this repository. I intend to make it easy for you to explore it and also see the though process. While also get you excited in the right parts, and well, forwarding my hiring process.
 
+## Focusing in productivity in a dockerized environment 🐳 
+
+> What a pleasure! you just run `docker-compose up` and you can code away!
+> - The only developer that has used this repo
+
+You are as fast as your local development environment: That has a `multi-stage, multi-build` `Dockerfile`, and a `docker-compose up` that uses `Nginx`as a reverse proxy to avoid any `CORS` issues, as well as avoid rebuilding images with each code change (using `volume mount`) whist still have **HOT-RELOADING** for both *front* and *back*  🤯🤯🤯🤯🤯.
+
+Don't like `docker`? no worries, we have `.nvmrc` so you can do local development as well ..... but who does not like `docker`?
+
+## We are now BETA 😅
+
+There are still many things to improve, checkout [Projects](https://github.com/EstebanMarin/express-react-app/projects), or [OPEN_ISSUES](https://github.com/EstebanMarin/express-react-app/issues), to get a full picture of the project
+
+![Working Prototype](https://github.com/EstebanMarin/express-react-app/blob/mvp-alfa/EMM_app_GIF.gif)
+
 # Thought process (why?)
 
 Although, the technical challenge is straight forward in what it wants. I want to play the role to which I am applying and assuming this as a **OPEN PROJECT REVIEW** as it is called in _twilio_ and deliver an "actual" **product**, this will make me assume **stuff**, but I hepe these assumtions will trigger the conversation.
@@ -55,6 +70,6 @@ As mentioned before this is a two part system.
 
 ## Containers, CI/CD and more
 ```
-
+$ kill -9 $(lsof -t -i:8080)
 ➜  listen-up-full-stack-exercise-javascript git:(take-2) DOCKER_BUILDKIT=1 docker build --target frontend -t twilio:front . 
 ```
