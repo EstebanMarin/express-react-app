@@ -24,6 +24,7 @@ const reducer = (state, action) => {
     case actionTypes.SEARCH_TERM: return Object.assign({}, state, { searchTerm: action.payload })
     case actionTypes.GET_SUGGESTIONS: return Object.assign({}, state, { getSuggetions: action.payload })
     case actionTypes.UPDATE_USER_DETAILS: return Object.assign({}, state, { userDetail: action.payload, searchTerm: "" })
+    // escape hatch for async data fetching
     case actionTypes.ENTER_KEY_PRESSED: {
       axios.get(`/api/users/${state.searchTerm}`)
         .then(result => action.dispatch({ type: actionTypes.UPDATE_USER_DETAILS, payload: result.data }))
@@ -40,6 +41,8 @@ const isEmpty = obj => Object.keys(obj).length === 0
 export const InnerContainer = styled.div`
   height: 70vh;
   width: 100%;
+  line-height: 32px;
+  text-align: center;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -69,7 +72,6 @@ export default function MainContent() {
           type={"text"}
           onKeyPress={handleEnter(dispatch)}
         />
-        <p>ray_benigno</p>
         {isEmpty(userDetail) ? console.log("nothing") : ShowDetails(userDetail)}
       </InnerContainer>
     </>

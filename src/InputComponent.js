@@ -7,7 +7,7 @@ export const ValueWrapper = styled.input`
   height: 60px;
   box-sizing: border-box;
   border-radius: 20px;
-  border: 1px solid #b6c1ce;
+  border: 3px solid #b6c1ce;
   line-height: 32px;
   font-size: xx-large;
   text-align: center;
