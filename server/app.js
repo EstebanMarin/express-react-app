@@ -1,47 +1,18 @@
 import express from "express";
-const axios = require("axios").default;
-// axios.<method> will now provide autocomplete and parameter typings
+import axios from "axios"
+import { URI, friendsServices, playServices } from "./constants"
+import {
+  isUserPlay,
+  onlyUnique,
+  URIFactory,
+  anyRejectionAnswer400
+} from "./predicates"
 
 const app = express();
 
-app.get(
-  [
-    // ignore; endpoint for easily viewing the default server
-    // response on CodeSandbox
-    "/",
-    // endpoint initially used by the React app
-    "/api/test-endpoint",
-  ],
-  (req, res) => {
-    res.status(200).json({ test: "hello world! Esteban" });
-  }
-);
-
-
-
-
 app.get("/api/users/:username", async (req, res, next) => {
-  //constants
-  const URI = `users`
-  const twil_io = `https://mauvelous-leopard-5257.twil.io/`
-  const friendsServices = {
-    "listAll": `${twil_io}friends`,
-    "detailUserName": `${twil_io}friend-detail?username=`
-  }
-  const playServices = {
-    "listAllUsers": `${twil_io}plays`,
-    "detailUserName": `${twil_io}plays-detail?username=`
-  }
   // your code here!
   const { username } = req?.params;
-
-  // predicates
-  const isUserPlay = username => play => play.username === username
-  // https://stackoverflow.com/questions/1960473/get-all-unique-values-in-a-javascript-array-remove-duplicates
-  const onlyUnique = (v, i, s) => s.indexOf(v) === i
-  const URIFactory = s => `/${URI}/${s}`
-  const isRejectedPromise = promise => promise.status === 'rejected'
-  const anyRejectionAnswer400 = results => results.filter(isRejectedPromise).length > 0
 
 
   const allUserFriendsPromise = axios.get(`${friendsServices.listAll}`)
