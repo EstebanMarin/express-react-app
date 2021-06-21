@@ -9,11 +9,11 @@ Thanks for checking out this repository. I intend to make it easy for you to exp
 > What a pleasure! you just run `docker compose up` and you can code away!
 > -  _The only developer that has used this repo_
 
-You are as fast as your local development environment => we offer a `multi-stage, multi build `Dockerfile`, and a `docker-compose up` that uses `Nginx`as a reverse proxy to avoid any `CORS` issues, as well as avoid rebuilding images with each code change (using `volume mount`) whist still have **HOT-RELOADING** for both *front* and *back*  🤯🤯🤯🤯🤯.
+You are as fast as your local development environment => we offer a `multi-stage`, `multi build` `Dockerfile`, and a `docker-compose up` that uses `Nginx`as a reverse proxy to avoid any `CORS` issues, as well as avoid rebuilding images with each code change (using `volume mount` in the `docker-compose.yml`) whist still have **HOT-RELOADING** for both *front* and *back*  🤯🤯🤯🤯🤯.
 
 Don't like `docker`? no worries, we have `.nvmrc` so you can do local development as well .....
 
-Get as well prettier, eslinter and commitlinter and don't forget **CHECKOUT** the postman collections, there you will find all the collections to test the API, use them for an end to end testing
+Get as well prettier, eslinter and commitlinter and don't forget **CHECKOUT** the postman collections, there you will find how to test the API, use them for an end to end testing
 
 ## We are now ALFA 😅
 

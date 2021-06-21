@@ -23,7 +23,7 @@ export default function MainContent() {
           type={"text"}
           onKeyPress={handleEnter(dispatch)}
         />
-        <p>Not sure what username to type? <a href="https://mauvelous-leopard-5257.twil.io/friends">Check here for inspiration! or just type</a>  <strong>antony_cassinelli</strong> </p>
+        <p>Not sure what username to type? <a target="_blank" href="https://mauvelous-leopard-5257.twil.io/friends">Check here for inspiration! or just type</a>  <strong>antony_cassinelli</strong> </p>
         {isEmpty(userDetail) ? console.log("nothing") : ShowDetails(userDetail)}
       </InnerContainer>
     </>

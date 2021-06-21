@@ -22,7 +22,7 @@ export const reducer = (state, action) => {
         case actionTypes.SEARCH_TERM: return Object.assign({}, state, { searchTerm: action.payload })
         case actionTypes.GET_SUGGESTIONS: return Object.assign({}, state, { getSuggetions: action.payload })
         case actionTypes.UPDATE_USER_DETAILS: return Object.assign({}, state, { userDetail: action.payload, searchTerm: "" })
-        case actionTypes.ERROR_FECTHING: return Object.assign({}, state, { userDetail: action.payload, searchTerm: "😔 error-in-username 🤦🏽‍♀️", userDetail: {} })
+        case actionTypes.ERROR_FECTHING: return Object.assign({}, state, { searchTerm: "😔 error-in-username 🤦🏽‍♀️", userDetail: {} })
         // escape hatch for async data fetching to be solved with useEffect
         case actionTypes.ENTER_KEY_PRESSED: {
             axios.get(`/api/users/${state.searchTerm}`)
