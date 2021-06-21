@@ -1,4 +1,6 @@
-# Welcome
+# Welcome 
+
+**TL;DR**: in root run `docker-compose up` => 😃, thats all you need.
 
 Thanks for checking out this repository. I intend to make it easy for you to explore it and also see the thought process. While also get you excited in the right bits, and well, forwarding my hiring process.
 
