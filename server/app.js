@@ -1,5 +1,4 @@
 import express from "express";
-import axios from "axios"
 import { friendsURL, playURL } from "./constants"
 import { anyRejectionAnswer400 } from "./predicates"
 import TwilioService from "./services";
@@ -13,41 +12,7 @@ app.get("/api/users/:username", async (req, res, next) => {
   // your code here!
   const { username } = req?.params;
 
-
-  // const allUserFriendsPromise = axios.get(`${friendsURL.listAll}`)
-  // const userFriendsDetailsPromise = axios.get(`${friendsURL.detailUserName}${username}`)
-  // const allUsersPlayInfoPromise = axios.get(`${playURL.listAllUsers}`)
-  // const userNamePlayDetailsPromise = axios.get(`${playURL.detailUserName}${username}`)
-
-  // const promises = [
-  //   allUserFriendsPromise,
-  //   userFriendsDetailsPromise,
-  //   allUsersPlayInfoPromise,
-  //   userNamePlayDetailsPromise
-  // ]
-
-  // const generateBody = result => {
-  //   const dataCleanup = answer => answer?.value?.data
-  //   const [
-  //     allUserFriends,
-  //     userFriendsDetails,
-  //     allUsersPlayInfo,
-  //     userNamePlayDetails
-  //   ] = result.map(dataCleanup)
-
-
-  //   return {
-  //     username: username,
-  //     friends: userFriendsDetails.friends.length,
-  //     plays: allUsersPlayInfo.plays.filter(isUserPlay(username)).length,
-  //     tracks: userNamePlayDetails.plays.filter(onlyUnique),
-  //     uri: URIFactory(username)
-  //   }
-  // }
-
-  const promises = twilioService.generatePromises(username)
-
-  Promise.allSettled(promises)
+  Promise.allSettled(twilioService.generatePromises(username))
     .then((results) => {
       console.log(`Hello ${username}`)
       anyRejectionAnswer400(results) ?
