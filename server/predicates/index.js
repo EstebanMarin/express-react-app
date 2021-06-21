@@ -1,4 +1,4 @@
-import { URI, friendsServices, playServices } from "../constants"
+import { URI, friendsURL, playURL } from "../constants"
 // predicates
 export const isUserPlay = username => play => play.username === username
 // https://stackoverflow.com/questions/1960473/get-all-unique-values-in-a-javascript-array-remove-duplicates
